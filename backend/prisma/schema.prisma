@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Form {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  title     String?
+  sections  Section[]
+  submissions Submission[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Section {
+  id     String  @id @default(uuid())
+  name   String
+  formId String
+  form   Form    @relation(fields: [formId], references: [id], onDelete: Cascade)
+  fields Field[]
+  order  Int     @default(0)
+}
+
+model Field {
+  id          String @id @default(uuid())
+  label       String
+  type        String
+  sectionId   String
+  section     Section @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  order       Int    @default(0)
+  submissionValues SubmissionValue[]
+}
+
+model Submission {
+  id      String @id @default(uuid())
+  formId  String
+  token   String
+  form    Form   @relation(fields: [formId], references: [id], onDelete: Cascade)
+  values  SubmissionValue[]
+  createdAt DateTime @default(now())
+}
+
+model SubmissionValue {
+  id           String     @id @default(uuid())
+  fieldId      String
+  submissionId String
+  value        String
+  field        Field      @relation(fields: [fieldId], references: [id], onDelete: Cascade)
+  submission   Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+} 
