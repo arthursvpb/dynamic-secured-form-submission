@@ -1,225 +1,200 @@
-# Dynamic Secured Form Submission
+<h1 align="center">🔐 Dynamic Secured Form Submission</h1>
 
-A full-stack application for creating dynamic forms with secure URLs and public submission capabilities. Built with Next.js, Express.js, Prisma, and PostgreSQL.
+<p align="center">
+  <a href="#-running">Running</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-testing">Testing</a>
+</p>
 
-## Features
+<p align="center">
+  <a href="#-license">
+    <img alt="License" src="https://img.shields.io/static/v1?label=license&message=MIT&color=3b82f6&labelColor=000000">
+  </a>
+</p>
 
-- **Admin Dashboard**: Create dynamic forms with custom sections and fields
-- **Secure URLs**: Generate cryptographically secure, tokenized URLs for forms
-- **Public Submissions**: Allow anyone to submit forms without authentication
-- **Step-by-step Forms**: Multi-section forms with validation and progress tracking
-- **Responsive Design**: Clean, modern UI built with Tailwind CSS
-- **Docker Support**: Complete containerized development environment
+<p align="center">
+A full-stack application for creating dynamic forms with cryptographically secure URLs and public submission capabilities. Built with Next.js, Express.js, Prisma, and PostgreSQL for enterprise environments.
+</p>
 
-## Tech Stack
+## 🚀 Features
 
-### Backend
+✅ **Admin Dashboard** - Create dynamic forms with custom sections and fields  
+✅ **Secure Token Generation** - Cryptographically strong URLs
+✅ **Public Form Access** - Anonymous submissions without user authentication  
+✅ **Step-by-step Navigation** - Multi-section forms with validation and progress tracking  
+✅ **Responsive Design** - Modern UI built with Tailwind CSS  
+✅ **Docker Support** - Complete containerized development environment  
+✅ **Comprehensive Testing** - Unit tests and E2E tests with Playwright  
+✅ **Security-First** - SQL injection protection, CORS, Helmet.js, input validation
 
-- **Express.js** - REST API server
-- **Prisma** - Database ORM and migrations
-- **PostgreSQL** - Primary database
-- **TypeScript** - Type safety
-- **JWT** - Authentication
-- **Joi** - Input validation
-- **Jest** - Unit testing
+## 💻 Running
 
-### Frontend
+### **Requirements**
 
-- **Next.js 14** - React framework with App Router
-- **Tailwind CSS** - Utility-first CSS framework
-- **React Hook Form** - Form management
-- **Axios** - HTTP client
-- **Playwright** - E2E testing
-- **TypeScript** - Type safety
+- `docker` and `docker-compose`
+- `node >= 18` (for local development)
 
-## Quick Start
-
-### Prerequisites
-
-- Docker and Docker Compose
-- Node.js 18+ (for local development)
-
-### Option 1: Docker (Recommended)
-
-1. **Clone the repository**
-
-   ```bash
-   git clone <repository-url>
-   cd dynamic-secured-form-submission
-   ```
-
-2. **Start all services**
-
-   ```bash
-   docker-compose up
-   ```
-
-3. **Access the application**
-   - Frontend: http://localhost:3000
-   - Backend API: http://localhost:3001
-   - Database: PostgreSQL on port 5432
-
-### Option 2: Local Development
-
-1. **Setup Backend**
-
-   ```bash
-   cd backend
-   npm install
-
-   # Setup environment variables
-   cp .env.example .env
-   # Edit .env with your database credentials
-
-   # Run database migrations
-   npx prisma migrate dev
-
-   # Start development server
-   npm run dev
-   ```
-
-2. **Setup Frontend**
-
-   ```bash
-   cd frontend
-   npm install
-
-   # Start development server
-   npm run dev
-   ```
-
-## Admin Access
-
-Use these credentials to access the admin dashboard:
-
-- **Username**: `admin`
-- **Password**: `password123`
-
-Navigate to `/admin` to log in and create forms.
-
-## API Documentation
-
-### Authentication
-
-- `POST /api/auth/login` - Admin login
-- `POST /api/auth/verify` - Verify JWT token
-
-### Forms
-
-- `POST /api/forms` - Create new form (requires auth)
-- `GET /api/forms` - List all forms (requires auth)
-- `GET /api/forms/token/:token` - Get form by token (public)
-
-### Submissions
-
-- `POST /api/submissions/:token` - Submit form data (public)
-- `GET /api/submissions/form/:formId` - Get form submissions (requires auth)
-
-## Testing
-
-### Unit Tests
+#### 1️⃣ Clone the Repository
 
 ```bash
-# Backend tests
+git clone https://github.com/arthursvpb/dynamic-secured-form-submission.git
+cd dynamic-secured-form-submission
+```
+
+#### 2️⃣ Start the Application (Docker - Recommended)
+
+```bash
+# Start all services (backend, frontend, database)
+docker-compose up
+```
+
+**Application URLs:**
+
+- **Frontend:** `http://localhost:3000`
+- **Backend API:** `http://localhost:3001`
+- **Database:** PostgreSQL on port `5432`
+
+#### 3️⃣ Alternative: Local Development
+
+**Backend Setup:**
+
+```bash
+cd backend
+
+# Install dependencies
+npm install
+
+# Setup environment variables
+cp .env.example .env
+# Edit .env with your database credentials
+
+# Run database migrations
+npm run migrate
+
+# Start development server
+npm run dev
+```
+
+**Frontend Setup:**
+
+```bash
+cd frontend
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+## 🧪 Testing
+
+### **Unit Tests**
+
+Our unit tests cover critical backend functionality including token generation, validation, and security measures.
+
+#### **Backend Unit Tests**
+
+```bash
 cd backend
 npm test
+```
 
-# Frontend tests
+#### **Frontend Unit Tests**
+
+```bash
 cd frontend
 npm test
 ```
 
-### E2E Tests
+**Available Test Scripts:**
+
+- `npm test` - Run tests once
+- `npm run test:watch` - Run tests in watch mode
+
+### **End-to-End (E2E) Tests**
+
+Our E2E tests use **Playwright** to simulate real user interactions across the entire application flow.
+
+#### **Run E2E Tests**
 
 ```bash
 cd frontend
+
+# Run E2E tests (headless)
 npm run test:e2e
+
+# Run E2E tests with UI (visual)
+npm run test:e2e:ui
 ```
 
-The E2E tests cover:
+## 📜 Package.json Scripts
 
-- Admin login flow
-- Form creation and URL generation
-- Public form access and submission
-- Form validation and error handling
-- Confirmation message display
+### **Backend Scripts**
 
-## Security Features
-
-- **Secure Tokens**: Uses `crypto.randomBytes(32)` for unguessable form URLs
-- **Token Validation**: Server-side verification of all form tokens
-- **Input Validation**: Comprehensive validation using Joi schemas
-- **SQL Injection Protection**: Prisma ORM prevents SQL injection
-- **CORS Configuration**: Proper cross-origin resource sharing setup
-- **Helmet.js**: Security headers for Express.js
-
-## Project Structure
-
-```
-├── backend/
-│   ├── src/
-│   │   ├── routes/          # API route handlers
-│   │   ├── middleware/      # Authentication & validation
-│   │   ├── utils/          # Crypto & validation utilities
-│   │   └── __tests__/      # Unit tests
-│   ├── prisma/
-│   │   ├── schema.prisma   # Database schema
-│   │   └── migrations/     # Database migrations
-│   └── Dockerfile
-├── frontend/
-│   ├── src/
-│   │   ├── app/            # Next.js app routes
-│   │   ├── components/     # React components
-│   │   └── lib/           # API client & utilities
-│   ├── tests/e2e/         # Playwright E2E tests
-│   └── Dockerfile
-├── docker-compose.yml
-└── README.md
+```json
+{
+  "dev": "tsx watch src/server.ts", // Development with hot reload
+  "build": "tsc", // TypeScript compilation
+  "start": "node dist/server.js", // Production server
+  "migrate": "prisma migrate deploy", // Production migrations
+  "db:push": "prisma db push", // Development schema push
+  "db:studio": "prisma studio", // Visual database editor
+  "generate": "prisma generate", // Generate Prisma client
+  "test": "jest", // Run unit tests
+  "test:watch": "jest --watch" // Unit tests in watch mode
+}
 ```
 
-## Database Schema
+### **Frontend Scripts**
 
-The application uses a relational database with the following models:
-
-- **Form**: Container for dynamic forms with secure tokens
-- **Section**: Logical groupings within forms (e.g., "Personal Info")
-- **Field**: Individual form fields (text/number types only)
-- **Submission**: Form submission records
-- **SubmissionValue**: Individual field values for each submission
-
-## Environment Variables
-
-### Backend (.env)
-
+```json
+{
+  "dev": "next dev", // Next.js development server
+  "build": "next build", // Production build
+  "start": "next start", // Production server
+  "lint": "next lint", // ESLint checking
+  "test": "jest", // Run unit tests
+  "test:watch": "jest --watch", // Unit tests in watch mode
+  "test:e2e": "playwright test", // E2E tests (headless)
+  "test:e2e:ui": "playwright test --ui" // E2E tests with UI
+}
 ```
-DATABASE_URL=postgresql://user:password@localhost:5432/dynamic_forms
-JWT_SECRET=your-jwt-secret-here
+
+## 🔐 Admin Access
+
+Access the admin dashboard to create forms:
+
+**Credentials:**
+
+- **Username:** `admin`
+- **Password:** `password123`
+
+**Access URL:** `http://localhost:3000/admin`
+
+## ⚙️ Environment Variables
+
+### **Backend (.env)**
+
+```bash
+DATABASE_URL="postgresql://user:password@localhost:5432/forms_db"
+JWT_SECRET="your-super-secret-jwt-key-min-32-chars"
 PORT=3001
 NODE_ENV=development
-FRONTEND_URL=http://localhost:3000
+FRONTEND_URL="http://localhost:3000"
 ```
 
-### Frontend
+### **Docker Environment**
 
-```
-NEXT_PUBLIC_API_URL=http://localhost:3001
-```
+All environment variables are configured in `docker-compose.yml` for seamless container orchestration.
 
-## Development Notes
+## 📋 Development Workflow
 
-- The admin password is hardcoded as `password123` (bcrypt hash in code)
-- Forms support only text and number field types as specified
-- All form URLs use cryptographically secure 64-character hex tokens
-- The application uses conventional commits for version control
-- Code follows clean architecture principles with clear separation of concerns
+1. **Setup**: `docker-compose up` (starts all services)
+2. **Development**: Edit code with hot reload enabled
+3. **Testing**: `npm test` (unit) → `npm run test:e2e` (E2E)
+4. **Database**: `npm run db:studio` (visual editor)
+5. **Deployment**: `npm run build` → `npm start`
 
-## Production Deployment
+---
 
-For production deployment:
-
-1. Set `NODE_ENV=production`
-2. Use a secure JWT secret
-3. Configure proper CORS origins
-4. Set up SSL/TLS certificates
-5. Use environment-specific database credentials
-6. Configure proper logging and monitoring
+<p align="center">Made with ☕️ by Arthur Vasconcellos</p>
