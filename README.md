@@ -17,14 +17,14 @@ A full-stack application for creating dynamic forms with cryptographically secur
 
 ## 🚀 Features
 
-✅ **Admin Dashboard** - Create dynamic forms with custom sections and fields  
-✅ **Secure Token Generation** - Cryptographically strong URLs
-✅ **Public Form Access** - Anonymous submissions without user authentication  
-✅ **Step-by-step Navigation** - Multi-section forms with validation and progress tracking  
-✅ **Responsive Design** - Modern UI built with Tailwind CSS  
-✅ **Docker Support** - Complete containerized development environment  
-✅ **Comprehensive Testing** - Unit tests and E2E tests with Playwright  
-✅ **Security-First** - SQL injection protection, CORS, Helmet.js, input validation
+- ✅ **Admin Dashboard** - Create dynamic forms with custom sections and fields  
+- ✅ **Secure Token Generation** - Cryptographically strong URLs
+- ✅ **Public Form Access** - Anonymous submissions without user authentication  
+- ✅ **Step-by-step Navigation** - Multi-section forms with validation and progress tracking  
+- ✅ **Responsive Design** - Modern UI built with Tailwind CSS  
+- ✅ **Docker Support** - Complete containerized development environment  
+- ✅ **Comprehensive Testing** - Unit tests and E2E tests with Playwright  
+- ✅ **Security-First** - SQL injection protection, CORS, Helmet.js, input validation
 
 ## 💻 Running
 
